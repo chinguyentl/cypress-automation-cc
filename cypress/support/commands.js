@@ -14,27 +14,18 @@ Cypress.Commands.add("login", (email, password) => {
 
 Cypress.Commands.add("addBookToCollection", (bookName) => {
   const booksPage = new BooksPage();
-  //const profilePage = new ProfilePage();
-
-  booksPage.visit({ timeout: 6000 });
+const profilePage = new ProfilePage();
+  booksPage.visit({ timeout: 3000 });
   booksPage.searchForBook(bookName,{ timeout: 3000 });
   booksPage.openBook(bookName, { timeout: 3000 });
 
   cy.on("window:alert", (text) => {
     expect(text).to.contains("Book added to your collection.");
   });
-  //cy.contains("button", "Add To Your Collection").should("be.visible").click();
-  //cy.get(".text-right #addNewRecordButton").click()
-  //cy.get("#addNewRecordButton").eq(1).should("be.visible").click()
     cy.get('button').contains('Add To Your Collection').should("be.visible").click()
 
-  //booksPage.addNewRecordButton.should("be.visible").click();
-
   // Return to the profile and ensure the book appears
-  cy.contains("a.router-link", "Profile", { timeout: 6000 }).click();  
-  
-  
-  const profilePage = new ProfilePage();
+  cy.contains("a.router-link", "Profile", { timeout: 3000 }).click();        
   profilePage.verifyBookExists(bookName).should("exist");
 });
 

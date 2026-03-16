@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 
 describe("Scenario add book, search book", () => {
-  it("Scenario 2: Add book to your collection", () => {
+  it("Scenario 2: Add a book to collection", () => {
     cy.visit(ENV.urls.profileURL);
 
     cy.get("body").then(($body) => {
