@@ -1,27 +1,40 @@
 import BasePage from "./basePage";
 import { ENV } from "../core/env";
+import { LOGIN_PAGE_LOCATORS } from "./locators/common-locators";
 
 class LoginPage extends BasePage {
-  visit() {
-    super.visit(ENV.urls.loginURL);
+  elements = {
+    usernameInput: () =>
+      cy.get(LOGIN_PAGE_LOCATORS.USER_NAME_LOCATOR),
+    passwordInput: () =>
+      cy.get(LOGIN_PAGE_LOCATORS.PASSWORD_LOCATOR),
+    loginButton: () =>
+      cy.get(LOGIN_PAGE_LOCATORS.LOGIN_BUTTON_LOCATOR),
+  };
+
+  navigate() {
+    cy.visit(ENV.urls.loginURL);
   }
 
-  get usernameInput() {
-    return cy.get("#userName", { timeout: 10000 });
+  inputUsername(username) {
+    this.elements.usernameInput().should("be.visible")
+      .clear().type(username);
+  }
+  inputPassword(password) {
+    this.elements.passwordInput().should("be.visible")
+      .clear().type(password);
+  }
+  inputAccount(username, password) {
+    this.inputUsername(username);
+    this.inputPassword(password);
+  }
+  clickLoginButton() {
+    this.elements.loginButton().click();
   }
 
-  get passwordInput() {
-    return cy.get("#password");
-  }
-
-  get loginButton() {
-    return cy.get("#login", { timeout: 10000 });
-  }
-
-  login(email, password) {
-    this.usernameInput.should("be.visible").and("not.be.disabled").clear().type(email);
-    this.passwordInput.should("be.visible").and("not.be.disabled").clear().type(password);
-    this.loginButton.should("be.visible").and("not.be.disabled").click();
+  login(username, password) {
+    this.inputAccount(username, password);
+    this.clickLoginButton();
   }
 }
 
