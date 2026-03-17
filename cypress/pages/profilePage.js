@@ -37,7 +37,7 @@ class ProfilePage extends BasePage {
   }
 
   verifyBookExists(bookName) {
-   return cy.get("tbody tr", { timeout: 8000 }).then(($rows) => {
+   return cy.get("tbody tr", { timeout: 5000 }).then(($rows) => {
       return Array.from($rows).some((row) => row.innerText.includes(bookName));
     });
   }

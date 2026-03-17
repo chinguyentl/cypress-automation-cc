@@ -5,9 +5,7 @@ class BooksPage extends BasePage {
   visit() {
     super.visit(ENV.urls.booksURL);
   }
-  get addNewRecordButton() {
-    return cy.get(".text-right #addNewRecordButton");
-  }
+
   get searchBox() {
     return cy.get("#searchBox");
   }
@@ -20,13 +18,20 @@ class BooksPage extends BasePage {
   }
 
   openBook(bookName) {
-    cy.contains("a", bookName).should("be.visible").click();
+    cy.contains("a", bookName).should("be.visible").click( { timeout: 3000 } );
   }
+  
+  addBook() { 
+    cy.on("window:alert", (text) => {
+    expect(text).to.contains("Book added to your collection.");
+  });
+  cy.get('button').contains('Add To Your Collection').should("be.visible").click({ timeout: 3000 } )
+}
 
   addBookToCollection(bookName) {
     this.searchForBook(bookName);
     this.openBook(bookName);
-    this.addNewRecordButton.should("be.visible").click();
+   this.addBook();
   }
 }
 export default BooksPage;
