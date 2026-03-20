@@ -1,37 +1,51 @@
 import BasePage from "./basePage";
 import { ENV } from "../core/env";
+import { REGISTER_PAGE_LOCATORS } from "./locators/locators";
 
 class RegisterPage extends BasePage {
-  visit() {
-    super.visit(ENV.urls.registerURL);
+  elements = {  
+    firstNameInput: () => cy.get(REGISTER_PAGE_LOCATORS.FIRST_NAME_LOCATOR),
+    lastNameInput: () => cy.get(REGISTER_PAGE_LOCATORS.LAST_NAME_LOCATOR),
+    usernameInput: () => cy.get(REGISTER_PAGE_LOCATORS.USER_NAME_LOCATOR),
+    passwordInput: () => cy.get(REGISTER_PAGE_LOCATORS.PASSWORD_LOCATOR),
+    registerButton: () =>
+      cy.get(REGISTER_PAGE_LOCATORS.REGISTER_BUTTON_LOCATOR),
+  };
+
+  navigate() {
+    cy.visit(ENV.urls.registerURL);
   }
 
-  get firstNameInput() {
-    return cy.get("#firstname");
+  inputfirstName(firstName) {
+    this.elements.firstNameInput().should("be.visible").clear().type(firstName);
   }
 
-  get lastNameInput() {
-    return cy.get("#lastname");
+  inputlastName(lastName) {
+    this.elements.lastNameInput().should("be.visible").clear().type(lastName);
   }
 
-  get usernameInput() {
-    return cy.get("#userName");
+  inputusername(userName) {
+    this.elements.usernameInput().should("be.visible").clear().type(userName);
   }
 
-  get passwordInput() {
-    return cy.get("#password");
+  inputpassword(password) {
+    this.elements.passwordInput().should("be.visible").clear().type(password);
   }
 
-  get registerButton() {
-    return cy.get("#register");
+  inputUserData({ firstName, lastName, userName, password }) {
+    this.inputfirstName(firstName);
+    this.inputlastName(lastName);
+    this.inputusername(userName);
+    this.inputpassword(password);
+  }
+
+  clickregisterButton() {
+    this.elements.registerButton().click();
   }
 
   register({ firstName, lastName, userName, password }) {
-    this.firstNameInput.should("be.visible").type(firstName);
-    this.lastNameInput.should("be.visible").type(lastName);
-    this.usernameInput.should("be.visible").type(userName);
-    this.passwordInput.should("be.visible").type(password);
-    this.registerButton.should("be.visible").and("not.be.disabled").click();
+    this.inputUserData({ firstName, lastName, userName, password });
+    this.clickregisterButton();
   }
 }
 

@@ -1,31 +1,26 @@
 import RegisterPage from "../pages/registerUserPage";
 import { ENV } from "../core/env";
 
+ const registerPage = new RegisterPage();
 let registerUserData;
 
-before(() => {
+beforeEach(() => {
   cy.fixture("registerUserData").then((data) => {
     registerUserData = data;
   });
+  cy.visit(ENV.urls.registerURL);
 });
 
-describe("Register Successfully", () => {
-  const registerPage = new RegisterPage();
+describe("Register Successfully", () => { 
 
   it("Register successfully and show alert", () => {
     const randomUser = `user${Date.now()}`;
-
-    cy.visit(ENV.urls.registerURL, {
-      onBeforeLoad(win) {
-        cy.stub(win, "alert").as("alertStub");
-      },
-    });
 
     registerPage.register({
       firstName: registerUserData.firstName,
       lastName: registerUserData.lastName,
       userName: randomUser,
-      password: registerUserData.password,
+      password: registerUserData.password
     });
 
     cy.on("window:alert", (text) => {

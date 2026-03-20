@@ -16,12 +16,12 @@ Cypress.Commands.add("addBookToCollection", (bookName) => {
   const booksPage = new BooksPage();
 const profilePage = new ProfilePage();
   booksPage.visit({ timeout: 3000 });
-  booksPage.searchForBook(bookName,{ timeout: 3000 });
+  booksPage.searchBookForAdd(bookName,{ timeout: 3000 });
   booksPage.openBook(bookName, { timeout: 3000 });
   booksPage.addBook({ timeout: 3000 });
 
   // Return to the profile and ensure the book appears
-  cy.contains("a.router-link", "Profile", { timeout: 3000 }).click();        
+  booksPage.goToProfilePage();
   profilePage.verifyBookExists(bookName).should("exist");
 });
 
@@ -30,3 +30,6 @@ Cypress.Commands.add("deleteBookFromProfile", (bookName) => {
   profilePage.visit();
   profilePage.deleteBook(bookName);
 });
+
+// Cypress.Commands.add("searchBox", (bookName) => {
+// });

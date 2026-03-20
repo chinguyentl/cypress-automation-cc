@@ -1,6 +1,6 @@
 import BasePage from "./basePage";
 import { ENV } from "../core/env";
-import { LOGIN_PAGE_LOCATORS } from "./locators/common-locators";
+import { LOGIN_PAGE_LOCATORS } from "./locators/locators";
 
 class LoginPage extends BasePage {
   elements = {
