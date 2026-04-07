@@ -26,7 +26,7 @@ class BooksPage extends BasePage {
     this.elements
       .searchBoxInput()
       .should("be.visible")
-      .type(keyword, { delay: 100 });
+      .type(keyword, { delay: 80 });
   }
 
   verifySearchResults(keyword) {
@@ -37,7 +37,8 @@ class BooksPage extends BasePage {
     this.elements
       .openBookLink(bookName)
       .should("be.visible")
-      .click({ timeout: 3000 });
+      .click();
+      //cy.url().should("include", "/books?search=");
   }
 
   addBook() {
@@ -47,13 +48,13 @@ class BooksPage extends BasePage {
     this.elements
       .addToCollectionButton()
       .should("be.visible")
-      .click({ timeout: 5000 });      
+      .click();      
   }
 
     goToProfilePage() {
     cy.get(CommonLocators.PROFILE_LOCATOR)
       .should("be.visible")
-      .click({ timeout: 7000 }); // Increased timeout for navigation
+      .click(); 
   }
 
   addBookToCollection(bookName) {

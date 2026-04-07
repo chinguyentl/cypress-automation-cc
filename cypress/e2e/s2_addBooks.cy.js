@@ -14,7 +14,7 @@ beforeEach(() => {
     loginData = data;
     cy.visit(ENV.urls.loginURL);
     loginPage.login(loginData.email, loginData.password);
-    cy.wait(5000);
+    cy.wait(3000);
   });
 });
 

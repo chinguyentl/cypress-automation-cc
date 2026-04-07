@@ -20,3 +20,19 @@ export const REGISTER_PAGE_LOCATORS = {
     PASSWORD_LOCATOR: "#password",
     REGISTER_BUTTON_LOCATOR: "#register"
 }
+
+export const STUDENT_LOCATORS = {
+    FIRST_NAME_LOCATOR: "#firstName",
+    LAST_NAME_LOCATOR: "#lastName",
+    EMAIL_LOCATOR: "#userEmail",
+    GENDER_LOCATOR: "#gender-radio-1",
+    MOBILE_LOCATOR: "#userNumber",
+    DOB_INPUT_LOCATOR: "#dateOfBirthInput",
+    SUBJECTS_LOCATOR: "#subjectsInput",
+    HOBBIES_SPORTS_LOCATOR: "#hobbies-checkbox-1",
+    PICTURE_UPLOAD_LOCATOR: "#uploadPicture",
+    CURRENT_ADDRESS_LOCATOR: "#currentAddress",
+    STATE_DROPDOWN_LOCATOR: "#state",
+    CITY_DROPDOWN_LOCATOR: "#city",
+    SUBMIT_BUTTON_LOCATOR: "#submit"
+}

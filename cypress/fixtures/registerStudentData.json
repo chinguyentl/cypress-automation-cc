@@ -1,0 +1,14 @@
+{
+  "firstName": "Chi",
+  "lastName": "Nguyen",
+  "gender": "Male",
+  "mobile": "0123456789",
+  "email": "chinguyen@gmail.com",
+  "dateOfBirth": "2026-03-26",
+ "subjects": ["Maths"],
+  "hobbies": "Reading", 
+  "picture": "cypress/fixtures/studentImage.jpg",
+  "currentAddress": "CT1A, Phu Dien, Hanoi",
+  "state": "NCR",
+  "city": "Delhi"
+}
